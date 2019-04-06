@@ -15,12 +15,12 @@ import static com.tigerit.exam.IO.*;
  * application's execution points start from inside run method.
  */
 class Table {
-    String name;
-    String alias;
-    int numofCol;
-    int numofRow;
-    String[] colName;
-    int[][] data;
+    private String name;
+    private String alias;
+    private int numofCol;
+    private int numofRow;
+    private String[] colName;
+    private int[][] data;
 
     public Table() {
         colName = new String[101];
