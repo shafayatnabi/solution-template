@@ -115,9 +115,6 @@ class Pair {
         return tableId;
     }
 
-    public Pair() {
-    }
-
     public void setTableId(int tableId) {
         this.tableId = tableId;
     }
@@ -249,6 +246,7 @@ public class Solution implements Runnable {
         Table[] table = new Table[20];
         testCase = readLineAsInteger();
         for (int test = 1; test <= testCase; test++) {
+            printLine("Test: " + test);
             int numofTable = readLineAsInteger();
             for (int tableIndex = 0; tableIndex < numofTable; tableIndex++) {
                 table[tableIndex] = getInput();
@@ -256,7 +254,7 @@ public class Solution implements Runnable {
 
             int query = readLineAsInteger();
             String instruction[] = new String[4];
-            printLine("Test: " + test);
+
             while (query > 0) {
                 instruction[0] = readLine();
                 instruction[1] = readLine();
@@ -319,16 +317,13 @@ public class Solution implements Runnable {
         splitQuery = instruction[3].split(" ");
 
         int colSize = table[queryTable.getTableId1()].getNumofCol();
-        //printLine("Column Size "+colSize);
+
         id = queryTable.getTableId1();
         int colId = -1;
         String search = splitQuery[1].substring(queryTable.getAliasName1().length() + 1);
-        //printLine("Search String "+search+" Lenght "+search.length());
         for (int index = 0; index < colSize; index++) {
             String name = table[id].getColName(index);
             if (name.compareTo(search) == 0) {
-                //printLine("Column "+table[id].getColName(index)+" Search "+ splitQuery[1].substring(joinQuery.getAliasName1().length()+1));
-                //printLine("Column Name "+name +" Length "+name.length());
                 colId = index;
                 break;
             }
@@ -337,14 +332,12 @@ public class Solution implements Runnable {
         queryTable.setJoinColumnId1(colId);
 
         colSize = table[queryTable.getTableId2()].getNumofCol();
-        // printLine("Column Size "+colSize);
         search = splitQuery[3].substring(queryTable.getAliasName2().length() + 1);
         id = queryTable.getTableId2();
         colId = -1;
         for (int index = 0; index < colSize; index++) {
             String name = table[id].getColName(index);
             if (name.compareTo(search) == 0) {
-                //printLine("Column "+table[id].getColName(index)+" Search "+ splitQuery[3].substring(joinQuery.getAliasName2().length()+1));
                 colId = index;
                 break;
             }
@@ -405,7 +398,6 @@ public class Solution implements Runnable {
             }
 
         }
-        //printLine(queryTable);
         for (int rowIndex1 = 0; rowIndex1 < table[queryTable.getTableId1()].getNumofRow(); rowIndex1++) {
             for (int rowIndex2 = 0; rowIndex2 < table[queryTable.getTableId2()].getNumofRow(); rowIndex2++) {
                 if (table[queryTable.getTableId1()].getData()[rowIndex1][queryTable.getJoinColumnId1()] == table[queryTable.getTableId2()].getData()[rowIndex2][queryTable.getJoinColumnId2()]) {
@@ -482,25 +474,19 @@ public class Solution implements Runnable {
         Table inputTable = new Table();
         String tableName = readLine();
         inputTable.setName(tableName);
-        //printLine(tableName);
         String[] colandRaw = readLine().split(" ");
         int row = Integer.parseInt(colandRaw[0]);
         int col = Integer.parseInt(colandRaw[1]);
-        // printLine(row +" "+col);
         inputTable.setNumofRow(row);
         inputTable.setNumofCol(col);
         String[] colName = readLine().split(" ");
         for (int index = 0; index < col; index++) {
             inputTable.setColName(colName[index], index);
-            // printLine(colName[index]);
         }
-        //printLine("Now print Row Col data");
         for (int rowIndex = 0; rowIndex < row; rowIndex++) {
             String[] colData = readLine().split(" ");
-            //printLine("Row index "+rowIndex);
             for (int colIndex = 0; colIndex < col; colIndex++) {
                 inputTable.setData(Integer.parseInt(colData[colIndex]), rowIndex, colIndex);
-                // printLine(colData[colIndex]);
             }
         }
         return inputTable;
