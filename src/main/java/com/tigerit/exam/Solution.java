@@ -431,7 +431,7 @@ public class Solution implements Runnable {
 
     }
 
-    private void processandPrintResult(QueryTable queryTable) {
+    public void processandPrintResult(QueryTable queryTable) {
         Collections.sort(queryTable.getResultList(), new Comparator<ArrayList<Integer>>() {
             @Override
             public int compare(ArrayList<Integer> objects1, ArrayList<Integer> objects2) {
